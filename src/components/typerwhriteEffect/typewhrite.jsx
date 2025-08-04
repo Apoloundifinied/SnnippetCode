@@ -27,4 +27,4 @@ function Typewriterthis() {
   );
 }
 
-export default MeuTypewriter;
+export default Typewriterthis;
