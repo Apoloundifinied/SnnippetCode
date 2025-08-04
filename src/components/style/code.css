@@ -1,0 +1,281 @@
+/* === Reset Básico === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* === Variáveis de Tema === */
+:root {
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  --color-dark-bg: #000;
+  --color-dark-surface: #111;
+  --color-dark-border: #1f1f1f;
+  --color-dark-text: #fff;
+  --color-dark-subtext: #888;
+  --color-dark-accent: #00ff99;
+
+  --color-light-bg: #fff;
+  --color-light-surface: #f9f9f9;
+  --color-light-border: #ddd;
+  --color-light-text: #111;
+  --color-light-subtext: #666;
+  --color-light-accent: #000;
+}
+
+/* === Elementos Base === */
+body {
+  font-family: var(--font-main);
+  min-height: 100vh;
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+  overflow-x: hidden;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  min-height: 100vh;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.app-container.light {
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+/* === Editor === */
+.editor-container {
+  width: 100%;
+  max-width: 896px;
+  background: var(--color-dark-surface);
+  border: 1px solid var(--color-dark-border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-container.light .editor-container {
+  background: var(--color-light-surface);
+  border-color: var(--color-light-border);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* === Header === */
+.editor-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.editor-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: inherit;
+}
+
+/* === Botões === */
+.editor-controls {
+  display: flex;
+  gap: 10px;
+}
+
+.control-button {
+  background: transparent;
+  color: var(--color-dark-accent);
+  border: 1px solid var(--color-dark-accent);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.control-button:hover {
+  background: var(--color-dark-accent);
+  color: #000;
+}
+
+.app-container.light .control-button {
+  color: var(--color-light-accent);
+  border-color: var(--color-light-accent);
+}
+
+.app-container.light .control-button:hover {
+  background: var(--color-light-accent);
+  color: var(--color-light-bg);
+}
+
+/* === Conteúdo === */
+.editor-content {
+  display: flex;
+  position: relative;
+  min-height: 200px;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.line-numbers {
+  width: 40px;
+  padding: 10px 8px 10px 0;
+  text-align: right;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--color-dark-subtext);
+  user-select: none;
+  line-height: 1.5;
+}
+
+.app-container.light .line-numbers {
+  color: var(--color-light-subtext);
+}
+
+.line-number {
+  opacity: 0.8;
+}
+
+.code-wrapper {
+  flex: 1;
+  position: relative;
+}
+
+.code-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 10px;
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 1.5;
+  color: transparent;
+  pointer-events: none;
+  background: transparent;
+}
+
+.code-highlight:empty {
+  display: none;
+}
+
+.code-textarea {
+  width: 100%;
+  padding: 10px;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  line-height: 21px;
+  border-radius: 12px;
+  position: relative;
+  background: transparent;
+  color: var(--color-dark-text);
+  caret-color: var(--color-dark-text);
+  border: 1px solid var(--color-dark-border);
+  outline: none;
+  resize: none;
+  z-index: 2;
+  height: auto;
+  min-height: 1.5em;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.code-textarea::placeholder {
+  color: var(--color-dark-subtext);
+  
+}
+
+.app-container.light .code-textarea {
+  caret-color: var(--color-light-text);
+  border-color: var(--color-light-border);
+}
+
+.app-container.light .code-textarea::placeholder {
+  color: var(--color-light-subtext);
+}
+
+.app-container.light .code-highlight {
+  color: transparent;
+}
+
+/* === Scrollbar === */
+.code-textarea::-webkit-scrollbar,
+.code-highlight::-webkit-scrollbar {
+  width: 8px;
+}
+
+.code-textarea::-webkit-scrollbar-thumb,
+.code-highlight::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+
+.code-textarea::-webkit-scrollbar-thumb:hover,
+.code-highlight::-webkit-scrollbar-thumb:hover {
+  background: var(--color-dark-accent);
+}
+
+.app-container.light .code-textarea::-webkit-scrollbar-thumb,
+.app-container.light .code-highlight::-webkit-scrollbar-thumb {
+  background: #bbb;
+}
+
+.app-container.light .code-textarea::-webkit-scrollbar-thumb:hover,
+.app-container.light .code-highlight::-webkit-scrollbar-thumb:hover {
+  background: var(--color-light-accent);
+}
+
+/* === Footer === */
+.editor-footer {
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--color-dark-subtext);
+  text-align: right;
+}
+
+.app-container.light .editor-footer {
+  color: var(--color-light-subtext);
+}
+
+/* === Responsivo === */
+@media (max-width: 640px) {
+  .app-container {
+    padding: 16px;
+  }
+
+  .editor-container {
+    padding: 16px;
+    border-radius: 12px;
+  }
+
+  .code-textarea,
+  .code-highlight {
+    font-size: 13px;
+    padding: 12px;
+    
+  }
+
+  .line-numbers {
+    font-size: 13px;
+    width: 36px;
+  }
+
+  .editor-title {
+    font-size: 16px;
+  }
+
+  .control-button {
+    padding: 6px 12px;
+    font-size: 13px;
+  }
+}
